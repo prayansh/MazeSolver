@@ -1,5 +1,6 @@
 # MazeSolver
-This is an implementation of the code which was previously made on Scheme (DrRacket)
+This is an implementation of the code which was previously made on Scheme (DrRacket). The program was a question on a 
+CPSC 110 course Final offered by The University of British Columbia, Vancouver. 
 
 I have provided two implementation for the solver method
 * Recursive **[DONE]**
