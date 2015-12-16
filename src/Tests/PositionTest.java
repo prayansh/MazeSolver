@@ -1,7 +1,12 @@
 package Tests;
 
+import Data.DataDefs;
+import Data.Helpers;
 import Data.Position;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.function.Predicate;
 
 import static org.junit.Assert.*;
 
