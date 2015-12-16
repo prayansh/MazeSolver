@@ -13,7 +13,7 @@ public class DataDefs {
 
     public enum Cell {
         X('X'),// represents a wall square
-        O('O'),// represents an open square
+        O('_'),// represents an open square
         G('$');// represents the goal square
 
         private char value;
@@ -36,6 +36,8 @@ public class DataDefs {
     // we will interp. maze as a straight line however the positions will be x,y
     // and then mapped as length using defined functions
     /* Add Test for each board to check if valid */
+    // TODO implement Maze as an extension of List<Cell> for more readability
+    // TODO implement Path as an extension of List<Position>
 
     public static Cell M0[][] = {
             {X, X, X},

@@ -6,5 +6,7 @@ I have provided two implementation for the solver method
 * Recursive **[DONE]**
 * Non-recursive [TODO]
 
-A feature yet to be implemented is the ability solve mazes of size `[N*M]`
-and also the ability to create solvable mazes given the size
+Features coming soon
+* render mazes in pics and not just text
+* ability solve mazes of size `[N*M]`
+* and also the ability to create solvable mazes given the size

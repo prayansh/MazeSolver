@@ -113,15 +113,14 @@ public class Solve {
 
     private ArrayList<Position> solvePosition(Position p, ArrayList<Position> rsf,
                                               ArrayList<WLE> todo, ArrayList<Position> visited) {
-        //System.out.println(rsf + "-->" + p+"--> {"+visited+"}");
         if (solvedQ(p)) {
             rsf.add(p);
             return rsf;
         } else if (visited.contains(p)) {
-            System.out.println("Been Here Done That " + p);
+//            System.out.println("Been Here Done That " + p);
             return solveList(todo, visited);
         } else {
-            System.out.println(rsf + "-->" + p + "--> {" + visited + "}");
+//            System.out.println(rsf + "-->" + p + "--> {" + visited + "}");
             rsf.add(p);
             visited.add(p);
             // This ensures that we follow the current path and not jump from one path to another

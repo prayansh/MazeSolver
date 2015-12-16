@@ -51,27 +51,30 @@ public class Helpers {
         int len = MazeLength(maze);
         for (int i = 0; i < len; i++) {
             for (int j = 0; j < len; j++) {
-                System.out.print(maze.get(new Position(i, j).mapToLength(len)).getValue() + " ");
+                System.out.print(maze.get(new Position(j, i).mapToLength(len)).getValue() + " ");
             }
             System.out.println();
         }
         System.out.println();
     }
 
-    @Test
-    public void printMazes() throws Exception {
-        renderMaze(DataDefs.M1);
-        renderMaze(DataDefs.M2);
-        renderMaze(DataDefs.M3);
-        renderMaze(DataDefs.M4);
-        renderMaze(DataDefs.M5);
-        renderMaze(DataDefs.M6);
-        renderMaze(produceList(DataDefs.M1));
-        renderMaze(produceList(DataDefs.M2));
-        renderMaze(produceList(DataDefs.M3));
-        renderMaze(produceList(DataDefs.M4));
-        renderMaze(produceList(DataDefs.M5));
-        renderMaze(produceList(DataDefs.M6));
+    public static void renderMazeWithPath(ArrayList<DataDefs.Cell> maze, ArrayList<Position> path) {
+        int len = MazeLength(maze);
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len; j++) {
+                Position cur = new Position(j, i);
+                if(cur.equals(path.get(0)))
+                    System.out.print("π" + " ");
+                else if (maze.get(cur.mapToLength(len)).equals(DataDefs.Cell.G))
+                    System.out.print("" + " ");
+                else if (path.contains(cur))
+                    System.out.print("•" + " ");
+                else
+                    System.out.print(maze.get(cur.mapToLength(len)).getValue() + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
 
 
