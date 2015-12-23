@@ -6,6 +6,8 @@ import Data.Position;
 import Solver.Solve;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 /**
@@ -74,7 +76,7 @@ public class Tests {
         String result = "";
         for (int x = 0; x < 4; x++) {
             for (int y = 0; y < 4; y++) {
-                result+=(s.nextPositions(new Position(x,y)));
+                result += (s.nextPositions(new Position(x, y)));
             }
         }
         assertTrue(result.equals("[(0,1)]" +
@@ -101,7 +103,7 @@ public class Tests {
         String result = "";
         for (int x = 0; x < 4; x++) {
             for (int y = 0; y < 4; y++) {
-                result+=(s.allPossible(new Position(x,y)));
+                result += (s.allPossible(new Position(x, y)));
             }
         }
         assertTrue(result.equals("[(1,0), (0,1)][(1,1), (0,0), (0,2)]" +

@@ -4,7 +4,7 @@ CPSC 110 course Final offered by The University of British Columbia, Vancouver.
 
 I have provided two implementation for the solver method
 * Recursive **[DONE]**
-* Non-recursive [TODO]
+* Non-recursive **[DONE]**
 
 Features coming soon
 * render mazes in pics and not just text

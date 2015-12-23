@@ -1,7 +1,5 @@
 package Data;
 
-import javafx.geometry.Pos;
-
 /**
  * Created by Prayansh on 2015-12-15.
  * Contains Data Definitions to be used and their interpretations

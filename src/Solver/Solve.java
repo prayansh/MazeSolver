@@ -3,11 +3,8 @@ package Solver;
 import Data.DataDefs;
 import Data.Helpers;
 import Data.Position;
-import org.junit.Test;
 
 import java.util.ArrayList;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by Prayansh on 2015-12-15.
@@ -45,6 +42,11 @@ public class Solve {
     public void setMAZE(ArrayList<DataDefs.Cell> maze) {
         this.MAZE = maze;
         this.LENGTH = Helpers.MazeLength(maze);
+    }
+
+    public void clear() {
+        MAZE = null;
+        LENGTH = 0;
     }
 
     /**
@@ -100,9 +102,10 @@ public class Solve {
     public ArrayList<Position> solveWithRecursion(Position start) {
         try {
             if (checkPass())
-                return solvePosition(start, new ArrayList<Position>(),
-                        new ArrayList<WLE>(),
-                        new ArrayList<Position>());
+                return solvePosition(start,
+                        new ArrayList<Position>(),//rsf
+                        new ArrayList<WLE>(),// work-list
+                        new ArrayList<Position>());//visited
         } catch (NullPointerException e) {
             e.printStackTrace();
             System.out.println("Maze not Solvable!");
@@ -117,12 +120,14 @@ public class Solve {
                                               ArrayList<WLE> todo, ArrayList<Position> visited) {
         if (solvedQ(p)) {
             rsf.add(p);
+            todo.clear();
+            visited.clear();
             return rsf;
         } else if (visited.contains(p)) {
 //            System.out.println("Been Here Done That " + p);
             return solveList(todo, visited);
         } else {
-            System.out.println(rsf + "-->" + p + "--> {" + visited + "}");
+//            System.out.println(rsf + "-->" + p + "--> {" + visited + "}");
             ArrayList<Position> newRsf = new ArrayList<Position>(rsf) {{
                 add(p);
             }};
@@ -211,5 +216,56 @@ public class Solve {
 
 
     // ============= IMPLEMENTATION 2 ===================== //
-    // TODO Implementation using non-recursive calls i.e while loop
+
+    /**
+     * Loop Implementation of Solver
+     *
+     * @param pos
+     * @return
+     */
+    public ArrayList<Position> solveWithLoop(Position pos) {
+        ArrayList<Position> rsf = new ArrayList<>();
+        ArrayList<Position> visited = new ArrayList<>();
+        ArrayList<WLE> wle = new ArrayList<>();
+        wle.add(new WLE(pos, rsf));
+        while (!wle.isEmpty()) {
+            WLE now = wle.get(0);
+            if (solvedQ(now.getCurrent())) {
+                now.getRsf().add(now.getCurrent());
+                return now.getRsf();
+            } else if (visited.contains(now.getCurrent())) {
+                wle.remove(now);
+                continue;
+            } else {
+                visited.add(now.getCurrent());
+                ArrayList<Position> newRsf = new ArrayList<Position>(now.getRsf()) {{
+                    add(now.getCurrent());
+                }};
+                ArrayList<WLE> newTodo = nextPositions(now.getCurrent(), newRsf);
+                wle.remove(now);
+                wle = append(newTodo, wle);
+                continue;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Appends l1 to l2 with l1 being first
+     * !!!! TESTED DO NOT CHANGE !!!!
+     *
+     * @param l1
+     * @param l2
+     * @return (append (list 1) (list 2)) -> (list 1 2)
+     */
+    public static ArrayList<WLE> append(ArrayList<WLE> l1, ArrayList<WLE> l2) {
+        for (WLE a : l2) {
+            l1.add(a);
+        }
+        l2.clear();
+        return l1;
+    }
+
+    //TODO Generate all paths
+    //TODO Generate a solvable maze
 }
