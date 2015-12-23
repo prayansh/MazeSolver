@@ -1,6 +1,5 @@
 import Data.DataDefs;
 import Data.Helpers;
-import Data.Position;
 import Solver.Solve;
 
 /**
@@ -10,7 +9,7 @@ public class MazeSolver {
     public static void main(String[] args) {
         try {
             Solve solver = new Solve(Helpers.produceList(DataDefs.M5));
-//            System.out.println("Path Taken:" + solver.solveWithRecursion(DataDefs.P4));
+//            System.out.println("Path Taken:" + solver.solveWithRecursion(DataDefs.P5));
 
             System.out.println("=============");
             Helpers.renderMaze(solver.getMAZE());

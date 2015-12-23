@@ -3,10 +3,8 @@ package Tests;
 import Data.DataDefs;
 import Data.Helpers;
 import Data.Position;
+import Solver.Solve;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.function.Predicate;
 
 import static org.junit.Assert.*;
 
@@ -16,7 +14,7 @@ import static org.junit.Assert.*;
  */
 
 
-public class PositionTest {
+public class Tests {
 
     public Position P1 = new Position();
     public Position P2 = new Position(10, 3);
@@ -69,4 +67,57 @@ public class PositionTest {
         assertEquals(3, P2.Y(), 0);
         assertEquals(10, P3.Y(), 0);
     }
+
+    @Test
+    public void testNextPositions() throws Exception {
+        Solve s = new Solve(Helpers.produceList(DataDefs.M1));
+        String result = "";
+        for (int x = 0; x < 4; x++) {
+            for (int y = 0; y < 4; y++) {
+                result+=(s.nextPositions(new Position(x,y)));
+            }
+        }
+        assertTrue(result.equals("[(0,1)]" +
+                "[(1,1)]" +
+                "[(0,1)]" +
+                "[]" +
+                "[(1,1)]" +
+                "[(0,1), (2,1)]" +
+                "[(2,2), (1,1)]" +
+                "[]" +
+                "[(2,1)]" +
+                "[(1,1), (2,2)]" +
+                "[(3,2), (2,1)]" +
+                "[(2,2)]" +
+                "[]" +
+                "[(2,1), (3,2)]" +
+                "[(2,2)]" +
+                "[(3,2)]"));
+    }
+
+    @Test
+    public void testAllPossible() throws Exception {
+        Solve s = new Solve(Helpers.produceList(DataDefs.M1));
+        String result = "";
+        for (int x = 0; x < 4; x++) {
+            for (int y = 0; y < 4; y++) {
+                result+=(s.allPossible(new Position(x,y)));
+            }
+        }
+        assertTrue(result.equals("[(1,0), (0,1)][(1,1), (0,0), (0,2)]" +
+                "[(1,2), (0,1), (0,3)]" +
+                "[(1,3), (0,2)][(0,0), (2,0), (1,1)]" +
+                "[(0,1), (2,1), (1,0), (1,2)]" +
+                "[(0,2), (2,2), (1,1), (1,3)]" +
+                "[(0,3), (2,3), (1,2)]" +
+                "[(1,0), (3,0), (2,1)]" +
+                "[(1,1), (3,1), (2,0), (2,2)]" +
+                "[(1,2), (3,2), (2,1), (2,3)]" +
+                "[(1,3), (3,3), (2,2)]" +
+                "[(2,0), (3,1)]" +
+                "[(2,1), (3,0), (3,2)]" +
+                "[(2,2), (3,1), (3,3)]" +
+                "[(2,3), (3,2)]"));
+    }
+
 }

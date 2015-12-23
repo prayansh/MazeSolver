@@ -3,9 +3,11 @@ package Solver;
 import Data.DataDefs;
 import Data.Helpers;
 import Data.Position;
+import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+
+import static org.junit.Assert.*;
 
 /**
  * Created by Prayansh on 2015-12-15.
@@ -120,11 +122,14 @@ public class Solve {
 //            System.out.println("Been Here Done That " + p);
             return solveList(todo, visited);
         } else {
-//            System.out.println(rsf + "-->" + p + "--> {" + visited + "}");
-            rsf.add(p);
+            System.out.println(rsf + "-->" + p + "--> {" + visited + "}");
+            ArrayList<Position> newRsf = new ArrayList<Position>(rsf) {{
+                add(p);
+            }};
+            // because it is pass by reference u need to create a new reference each time
             visited.add(p);
             // This ensures that we follow the current path and not jump from one path to another
-            ArrayList<WLE> newTodo = nextPosition(p, rsf);
+            ArrayList<WLE> newTodo = nextPositions(p, newRsf);
             newTodo.addAll(todo);
             return solveList(newTodo, visited);
         }
@@ -151,7 +156,7 @@ public class Solve {
      * @param rsf
      * @return
      */
-    private ArrayList<WLE> nextPosition(Position pos, ArrayList<Position> rsf) {
+    public ArrayList<WLE> nextPositions(Position pos, ArrayList<Position> rsf) {
         ArrayList<Position> allPossible = allPossible(pos);
         allPossible.removeIf(p -> validCell(cellAt(p)));
         ArrayList<WLE> result = new ArrayList<>();
@@ -162,13 +167,25 @@ public class Solve {
     }
 
     /**
+     * Produces the next moves by filtering out all invalid moves
+     *
+     * @param pos
+     * @return
+     */
+    public ArrayList<Position> nextPositions(Position pos) {
+        ArrayList<Position> allPossible = allPossible(pos);
+        allPossible.removeIf(p -> validCell(cellAt(p)));
+        return allPossible;
+    }
+
+    /**
      * Produces all the possible moves from current position
      * that are not out of bound
      *
      * @param pos
      * @return
      */
-    private ArrayList<Position> allPossible(Position pos) {
+    public ArrayList<Position> allPossible(Position pos) {
         int x = pos.X();
         int y = pos.Y();
 
@@ -183,7 +200,6 @@ public class Solve {
                         || (position.X() >= LENGTH) || (position.Y() >= LENGTH));
         return result;
     }
-
 
     private boolean solvedQ(Position p) {
         return (cellAt(p).getValue() == '$');
