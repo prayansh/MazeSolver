@@ -126,7 +126,7 @@ public class Solve {
             ArrayList<Position> newRsf = new ArrayList<Position>(rsf) {{
                 add(p);
             }};
-            // because it is pass by reference u need to create a new reference each time
+            // because it is reference object u need to create a new reference each time
             visited.add(p);
             // This ensures that we follow the current path and not jump from one path to another
             ArrayList<WLE> newTodo = nextPositions(p, newRsf);
