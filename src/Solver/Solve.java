@@ -39,11 +39,6 @@ public class Solve {
         throw new NullPointerException("Maze is null");
     }
 
-    public void setMAZE(ArrayList<DataDefs.Cell> maze) {
-        this.MAZE = maze;
-        this.LENGTH = Helpers.MazeLength(maze);
-    }
-
     public void clear() {
         MAZE = null;
         LENGTH = 0;
@@ -64,10 +59,6 @@ public class Solve {
         @Override
         public String toString() {
             return "{Cur:" + current + "," + rsf + "}";
-        }
-
-        public boolean add(Position pos) {
-            return rsf.add(pos);
         }
 
         public Position getCurrent() {
@@ -103,9 +94,9 @@ public class Solve {
         try {
             if (checkPass())
                 return solvePosition(start,
-                        new ArrayList<Position>(),//rsf
-                        new ArrayList<WLE>(),// work-list
-                        new ArrayList<Position>());//visited
+                        new ArrayList<>(),//rsf
+                        new ArrayList<>(),// work-list
+                        new ArrayList<>());//visited
         } catch (NullPointerException e) {
             e.printStackTrace();
             System.out.println("Maze not Solvable!");
@@ -195,10 +186,10 @@ public class Solve {
         int y = pos.Y();
 
         ArrayList<Position> result = new ArrayList<>();
-        result.add(new Position(x - 1, y));
-        result.add(new Position(x + 1, y));
-        result.add(new Position(x, y - 1));
-        result.add(new Position(x, y + 1));
+        result.add(new Position(x, y - 1));// Up
+        result.add(new Position(x + 1, y));// Right
+        result.add(new Position(x, y + 1));// Down
+        result.add(new Position(x - 1, y));// Left
 
         result.removeIf(position ->
                 (position.X() < 0) || (position.Y() < 0)
@@ -219,7 +210,6 @@ public class Solve {
 
     /**
      * Loop Implementation of Solver
-     *
      * @param pos
      * @return
      */

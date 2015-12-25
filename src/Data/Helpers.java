@@ -37,6 +37,20 @@ public class Helpers {
      * Renders the Image of the Maze
      */
 
+    public static void renderMaze(char[][] maze) {
+        for (int i = 0; i < maze.length; i++) {
+            for (int j = 0; j < maze[i].length; j++) {
+                System.out.print(maze[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    /**
+     * Renders the Image of the Maze
+     */
+
     public static void renderMaze(DataDefs.Cell[][] maze) {
         for (int i = 0; i < maze.length; i++) {
             for (int j = 0; j < maze[i].length; j++) {
